@@ -11,6 +11,26 @@ import sys
 from common_utils import load_file, print_grid
 
 
+def fill_grid_columns(row_coords, grid, output):
+    """
+    :param row_coords: Get the height of the row we want to fill
+    :param grid: the input grid to source the colour
+    :param output: the output grid
+    :return:
+    >>> rc = np.asarray([0, 2])
+    >>> op = np.asarray([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
+    >>> ip = np.asarray([[0, 0, 6], [0, 4, 0], [3, 0, 0]])
+    >>> fill_grid_columns(rc, ip, op)
+    array([[0, 0, 6],
+           [0, 0, 6],
+           [0, 0, 6]])
+    """
+    r = row_coords[0]
+    c = row_coords[1]
+    output[r:3, c] = grid[r][c]
+    return output
+
+
 def solve(input_grid):
     """
     Given the input grid from any training or evaluation pair in the input json file,
@@ -28,16 +48,13 @@ def solve(input_grid):
     grid = np.asarray(input_grid)
     # get the positions of the coloured squares
     result = np.where(grid != 0)
-    coords_array = list(zip(result[0], result[1]))
+    row_heights = np.asarray(list(zip(result[0], result[1])))
 
-    # iterate over the co-ords array, filling the grid to the co-ord position
-    z = np.zeros(grid.shape, dtype=int)
-    for i in range(len(coords_array)):
-        r = coords_array[i][0]
-        c = coords_array[i][1]
-        z[r:3, c] = grid[r][c]
+    # iterate over the columns, filling each column by the row range
+    output = np.zeros(grid.shape, dtype=int)
+    [fill_grid_columns(coords, grid, output) for coords in row_heights]
 
-    return z
+    return output
 
 
 def main():
@@ -52,6 +69,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
-
     doctest.testmod()
     main()
