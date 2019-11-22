@@ -20,7 +20,7 @@ def solve(input_grid):
     or 3. a Numpy 2D array of type int
     :param input_grid:
     :return: output_grid
-    >>> X = json.load(open("../data/training/c1d99e64.json"))
+    >>> X = json.load(open("data/c1d99e64.json"))
     >>> ia = np.asarray(X["test"][0]["input"])
     >>> solve(ia)
     array([[4, 0, 4, 0, 4, 4, 2, 0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 0, 4, 4, 2,
@@ -107,6 +107,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
-
     doctest.testmod()
     main()
