@@ -79,18 +79,16 @@ def solve(input_grid):
             4, 4, 4]])
     """
     grid = np.asarray(input_grid)
-    # find the rows and which are all dark
-    rows = []
-    for i in range(grid.shape[0]):
-        if np.all(grid[i, :] == 0):
-            rows.append(i)
+    # find the rows and which are all dark, will colour these red
+    rows_to_colour = [row for row in range(grid.shape[0]) if np.all(grid[row, :] == 0)]
+
     # colour in the cols
     for j in range(grid.shape[1]):
         if np.all(grid[:, j] == 0):
             grid[:, j] = 2
     # colour in rows
-    for row in range(len(rows)):
-        grid[rows[row], :] = 2
+    for row in range(len(rows_to_colour)):
+        grid[rows_to_colour[row], :] = 2
 
     return grid
 
