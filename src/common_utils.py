@@ -27,7 +27,7 @@ def load_file(filename):
         X = json.load(open(filename))
         train = X["train"]
         test = X["test"]
-        inputs = [i["input"] for i in chain(train, test)]
+        inputs = [np.asarray(i["input"]) for i in chain(train, test)]
         return inputs
     except FileNotFoundError:
         print('please enter a valid json file')
