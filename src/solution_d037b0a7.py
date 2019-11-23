@@ -11,24 +11,22 @@ import sys
 from common_utils import load_file, print_grid
 
 
-def fill_grid_columns(row_coords, grid, output):
+def fill_grid_columns(row_coords, grid):
     """
     :param row_coords: Get the height of the row we want to fill
     :param grid: the input grid to source the colour
-    :param output: the output grid
-    :return:
+    :return: the modified input grid
     >>> rc = np.asarray([0, 2])
-    >>> op = np.asarray([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
     >>> ip = np.asarray([[0, 0, 6], [0, 4, 0], [3, 0, 0]])
-    >>> fill_grid_columns(rc, ip, op)
+    >>> fill_grid_columns(rc, ip)
     array([[0, 0, 6],
-           [0, 0, 6],
-           [0, 0, 6]])
+           [0, 4, 6],
+           [3, 0, 6]])
     """
     r = row_coords[0]
     c = row_coords[1]
-    output[r:3, c] = grid[r][c]
-    return output
+    grid[r:3, c] = grid[r][c]
+    return grid
 
 
 def solve(input_grid):
@@ -51,10 +49,9 @@ def solve(input_grid):
     row_heights = np.asarray(list(zip(result[0], result[1])))
 
     # iterate over the columns, filling each column by the row range
-    output = np.zeros(grid.shape, dtype=int)
-    [fill_grid_columns(coords, grid, output) for coords in row_heights]
+    [fill_grid_columns(coords, grid) for coords in row_heights]
 
-    return output
+    return grid
 
 
 def main():
