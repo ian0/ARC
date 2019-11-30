@@ -93,6 +93,10 @@ def solve(grid):
 
 
 def main():
+    """
+    Main method, reads in file specified file from the command line,
+    calls the solve function to generate output
+    """
     try:
         inputs = load_file(sys.argv[1])
         for grid in inputs:
