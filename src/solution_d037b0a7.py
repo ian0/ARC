@@ -29,13 +29,13 @@ def fill_grid_columns(row_coords, grid):
     return grid
 
 
-def solve(grid):
+def solve(input_grid):
     """
     Given the input grid from any training or evaluation pair in the input json file,
     solve should return the correct output grid in the same format.
     Allowed formats are : 1. a JSON string containing a list of lists; or 2. a Python list of lists;
     or 3. a Numpy 2D array of type int
-    :param grid:
+    :param input_grid: the input gird to be transformed
     :return: the modified grid
     # >>> ig =  [[4, 0, 8], [0, 0, 0], [0, 7, 0]]
     # >>> solve(ig)
@@ -43,6 +43,7 @@ def solve(grid):
            [4, 0, 8],
            [4, 7, 8]])
     """
+    grid = np.asarray(input_grid)
     # get the positions of the coloured squares
     result = np.where(grid != 0)
     row_heights = np.asarray(list(zip(result[0], result[1])))
