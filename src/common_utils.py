@@ -18,8 +18,6 @@ def load_file(filename):
     testing inputs.
     :param filename:
     :return: a list of input grids
-    >>> load_file('../data/training/d037b0a7.json')
-    [[[0, 0, 6], [0, 4, 0], [3, 0, 0]], [[0, 2, 0], [7, 0, 8], [0, 0, 0]], [[4, 0, 0], [0, 2, 0], [0, 0, 0]], [[4, 0, 8], [0, 0, 0], [0, 7, 0]]]
     >>> load_file('invalid.json')
     please enter a valid json file
     """
